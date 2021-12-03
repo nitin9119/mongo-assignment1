@@ -1,0 +1,41 @@
+/*  create a database called assignment and collection called users*/
+use assignment
+
+db.createCollection(users)
+
+/*  Insert 10 documents in this users collection using both insert and insertMany*/
+db.users.insert({"first_name":"Nrupul","last_name":"Dev","email":"masai@school.com","gender":"male","ip_address":"211.66.170.173","age":36})
+db.users.insert({"first_name":"Aman","last_name":"vats","email":"aman@school.com","gender":"male","ip_address":"211.66.170.173","age":26})
+
+db.users.insertMany([{"first_name":"Boothe","last_name":"Flood","email":"bflood0@army.mil","gender":"Polygender","ip_address":"223.60.214.216","age":59},
+... {"first_name":"Nevile","last_name":"Jesty","email":"njesty1@harvard.edu","gender":"Agender","ip_address":"211.57.170.173","age":6},
+... {"first_name":"Elberta","last_name":"Hamblett","email":"ehamblett2@usgs.gov","gender":"Genderqueer","ip_address":"255.238.209.77","age":76},
+... {"first_name":"Clo","last_name":"Tamburi","email":"ctamburi3@sbwire.com","gender":"Polygender","ip_address":"203.137.94.170","age":9},
+... {"first_name":"Ryan","last_name":"Feare","email":"rfeare4@techcrunch.com","gender":"Agender","ip_address":"74.45.220.66","age":6},
+... {"first_name":"Cleopatra","last_name":"Esome","email":"cesome5@blogs.com","gender":"Genderfluid","ip_address":"61.192.157.166","age":52},
+... {"first_name":"Florance","last_name":"Summerskill","email":"fsummerskill6@odnoklassniki.ru","gender":"Agender","ip_address":"120.144.169.212","age":45},
+... {"first_name":"Ludovika","last_name":"Ruckman","email":"lruckman7@wufoo.com","gender":"Genderqueer","ip_address":"190.156.40.39","age":29}]) 
+
+/*  FindOne and find*/
+ db.users.findOne({"first_name":"Nrupul"})
+
+db.users.find({}).pretty()
+
+/*Update at least 3 documents using update and updateMany*/
+db.users.update({"first_name":"Boothe"},{$set:{"first_name":"Dushyant"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) 
+
+db.users.updateMany({"gender":"Male"},{$set:{"gender":"FeMale"}})
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+
+/*  Delete documents using remove, remove that will remove just 1 document, deleteOne, deleteMany*/ 
+
+db.users.remove({"first_name":"Nrupul"})
+WriteResult({ "nRemoved" : 1 }) 
+
+db.users.deleteMany({"age":6})
+{ "acknowledged" : true, "deletedCount" : 2 } 
+
+/* Then delete the database */
+db.dropDatabase()
+{ "dropped" : "assignment", "ok" : 1 } 
